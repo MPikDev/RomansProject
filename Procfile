@@ -1,1 +1,1 @@
-web: gunicorn waittime.waittime.wsgi
+web: gunicorn waittime.wsgi
