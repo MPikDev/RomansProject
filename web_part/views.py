@@ -7,6 +7,7 @@ from .models import CompanyInfo, STATES_TUPLE, SCHEDULING_OPTIONS, LOAD_TYPE_OPT
 # Create your views here.
 
 def home(request):
+
     company_infos = CompanyInfo.objects.all()
     data = {
         'company_infos': company_infos,
