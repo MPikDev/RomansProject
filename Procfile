@@ -1,1 +1,1 @@
-web: gunicorn personal_code.wsgi
+web: gunicorn waittime.wsgi
