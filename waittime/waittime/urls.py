@@ -20,5 +20,7 @@ from web_part import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home),
+    url(r'^add_new_company$', views.add_company_form),
+    url(r'^save_new_company$', views.add_company_info),
 
 ]

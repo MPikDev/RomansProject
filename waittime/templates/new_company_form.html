@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Company Info</title>
+</head>
+<body>
+<h1>Add New Company Info</h1>
+
+
+
+
+<button onclick="window.location.href = '/';">Home</button>
+
+
+
+<form action="/save_new_company" method="post">
+    {% csrf_token %}
+    <!-- the signup form -->
+    <div class="container">
+        <div class="signupBox col-xs-12 col-sm-10 col-sm-offset-1">
+            <div class="row">
+                <div class="center">
+                    <h2>Company Info</h2>
+                    {% for error in error_message %}
+                        <p class="error-text"><strong>{{ error }}</strong></p>
+                    {% endfor %}
+                </div>
+
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Company Name: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_name" name="company_name" type="text"
+                                   class="form-control light name-field" value="{{ company_name }}"
+                                   placeholder=""
+                                   maxlength="48"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Address: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="address" name="address" type="text"
+                                   class="form-control light name-field" value="{{ address }}"
+                                   placeholder=""
+                                   maxlength="128"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">State: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <select name="states_dropdown" class="filter-selectbox">
+                                {% for key, state in states %}
+                                <option value="{{ key }}">{{ state }}</option>
+                                {% endfor %} </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">City: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_city" name="company_city" type="text"
+                                   class="form-control light ignore" placeholder=""
+                                   maxlength="128" value="{{ city }}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class=" row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Zip Code: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_zip_code" name="company_zip_code" type="number"  step="1"
+                                   class="form-control light email-field" value="{{ zip_code }}"
+                                   />
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Wait Time (mins): *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="wait_time" name="wait_time" type="number" step="0.01"
+                                   class="form-control light email-field" value="{{ wait_time }}"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Load Time (mins): *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="load_time" name="load_time" type="number" step="0.01"
+                                   class="form-control light email-field" value="{{ load_time }}"
+                                   >
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Phone:*</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="camper_phone" name="camper_phone" type="text"
+                                   class="form-control light ignore" placeholder="999-999-9999"
+                                   maxlength="15" value="{{ phone }}"/>
+                        </div>
+                    </div>
+                </div>
+
+                               <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Scheduling Type: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <select name="schedule_dropdown" class="filter-selectbox">
+                                {% for key, schedule in schedule_options %}
+                                <option value="{{ key }}">{{ schedule }}</option>
+                                {% endfor %} </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">:Load Type: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <select name="load_dropdown" class="filter-selectbox">
+                                {% for key, load in load_options %}
+                                <option value="{{ key }}">{{ load }}</option>
+                                {% endfor %} </select>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-7 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Overnight Parking? *</div>
+                    </div>
+                    <div class="col-xs-2  col-sm-6 col-sm-offset-0 col-md-4">
+                        <input id="overnight_parking" name="overnight_parking" type="checkbox"
+                               class=" light ignore" placeholder="" value="True" {% if overnight_parking %}
+                               checked {% endif %}
+                               maxlength="30"/>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-7 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Lumper? *</div>
+                    </div>
+                    <div class="col-xs-2  col-sm-6 col-sm-offset-0 col-md-4">
+                        <input id="lumper" name="lumper" type="checkbox"
+                               class=" light ignore" placeholder="" value="True" {% if lumper %}
+                               checked {% endif %}
+                               maxlength="30"/>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-7 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Facilities? *</div>
+                    </div>
+                    <div class="col-xs-2  col-sm-6 col-sm-offset-0 col-md-4">
+                        <input id="facilities" name="facilities" type="checkbox"
+                               class=" light ignore" placeholder="" value="True" {% if facilities %}
+                               checked {% endif %}
+                               maxlength="30"/>
+                    </div>
+                </div>
+
+
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-1 col-xs-offset-1">
+                        <div class="separator bigMarginBottom bigMarginTop"></div>
+                    </div>
+
+                </div>
+                <br>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4">
+                        <input type="submit" class="btn btn-block black-boarder"
+                               id="register" value="Register">
+                        </input>
+                    </div>
+                </div>
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4">
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+</form>
+
+</body>
+</html>
