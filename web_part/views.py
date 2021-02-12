@@ -66,3 +66,13 @@ def add_company_form(request):
         load_options=LOAD_TYPE_OPTIONS
     )
     return render(request, 'new_company_form.html', data)
+
+
+def edit_company(request, **kwargs):
+    print("", kwargs['pk'])
+    data = dict(
+        states=STATES_TUPLE,
+        schedule_options=SCHEDULING_OPTIONS,
+        load_options=LOAD_TYPE_OPTIONS
+    )
+    return render(request, 'new_company_form.html', data)

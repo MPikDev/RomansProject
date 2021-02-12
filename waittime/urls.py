@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'^$', views.home),
     url(r'^add_new_company$', views.add_company_form),
     url(r'^save_new_company$', views.add_company_info),
+    url(r'^edit_company/(?P<pk>[0-9]+)/$', views.edit_company),
 
 ]
