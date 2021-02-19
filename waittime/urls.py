@@ -20,8 +20,10 @@ from web_part import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home),
+    url(r'^home$', views.home),
     url(r'^add_new_company$', views.add_company_form),
     url(r'^save_new_company$', views.add_company_info),
-    url(r'^edit_company/(?P<pk>[0-9]+)/$', views.edit_company),
+    url(r'^edit_company/(?P<pk>[0-9]+)/$', views.edit_company_form),
+    url(r'^save_edit_company/(?P<pk>[0-9]+)/$', views.save_edit_company),
 
 ]
