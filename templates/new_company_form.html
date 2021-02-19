@@ -2,19 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add New Company Info</title>
+    <title>{{title}}</title>
 </head>
 <body>
-<h1>Add New Company Info</h1>
-
-
+<h1>{{header}}</h1>
 
 
 <button onclick="window.location.href = '/';">Home</button>
 
 
-
-<form action="/save_new_company" method="post">
+<form action="/{{post_url}}" method="post">
     {% csrf_token %}
     <!-- the signup form -->
     <div class="container">
@@ -23,7 +20,7 @@
                 <div class="center">
                     <h2>Company Info</h2>
                     {% for error in error_message %}
-                        <p class="error-text"><strong>{{ error }}</strong></p>
+                    <p class="error-text"><strong>{{ error }}</strong></p>
                     {% endfor %}
                 </div>
 
@@ -40,9 +37,66 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row panel-row flexHeight center-vertically">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
-                        <div class="form-label">Address: *</div>
+                        <div class="form-label">Opening Time:</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_opening_time" name="company_opening_time" type="time"
+                                   class="form-control light name-field" value="{{ open_time }}"
+                                   placeholder=""
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Closing Time:</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_closing_time" name="company_closing_time" type="time"
+                                   class="form-control light name-field" value="{{ close_time }}"
+                                   placeholder=""
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Company Phone: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_phone" name="company_phone" type="text"
+                                   class="form-control light name-field" value="{{ phone }}"
+                                   placeholder="000-000-0000"
+                                   maxlength="15"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Company Website Link: *</div>
+                    </div>
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
+                        <div class="form-group">
+                            <input id="company_website_link" name="company_website_link" type="text"
+                                   class="form-control light name-field" value="{{ website_link }}"
+                                   placeholder=""
+                                   maxlength="128"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row panel-row flexHeight center-vertically">
+                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+                        <div class="form-label">Company Address: *</div>
                     </div>
                     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
                         <div class="form-group">
@@ -60,6 +114,7 @@
                     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
                         <div class="form-group">
                             <select name="states_dropdown" class="filter-selectbox">
+                                <option value="{{state}}" selected>{{state}} </option>
                                 {% for key, state in states %}
                                 <option value="{{ key }}">{{ state }}</option>
                                 {% endfor %} </select>
@@ -68,7 +123,7 @@
                     </div>
                 </div>
 
-                                <div class="row panel-row flexHeight center-vertically">
+                <div class="row panel-row flexHeight center-vertically">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
                         <div class="form-label">City: *</div>
                     </div>
@@ -87,9 +142,9 @@
                     </div>
                     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
                         <div class="form-group">
-                            <input id="company_zip_code" name="company_zip_code" type="number"  step="1"
+                            <input id="company_zip_code" name="company_zip_code" type="number" step="1"
                                    class="form-control light email-field" value="{{ zip_code }}"
-                                   />
+                            />
                         </div>
                     </div>
                 </div>
@@ -101,11 +156,11 @@
                         <div class="form-group">
                             <input id="wait_time" name="wait_time" type="number" step="0.01"
                                    class="form-control light email-field" value="{{ wait_time }}"
-                                   >
+                            >
                         </div>
                     </div>
                 </div>
-                                <div class="row panel-row flexHeight center-vertically">
+                <div class="row panel-row flexHeight center-vertically">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
                         <div class="form-label">Load Time (mins): *</div>
                     </div>
@@ -113,30 +168,19 @@
                         <div class="form-group">
                             <input id="load_time" name="load_time" type="number" step="0.01"
                                    class="form-control light email-field" value="{{ load_time }}"
-                                   >
-                        </div>
-                    </div>
-                </div>
-                <div class="row panel-row flexHeight center-vertically">
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
-                        <div class="form-label">Phone:*</div>
-                    </div>
-                    <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
-                        <div class="form-group">
-                            <input id="camper_phone" name="camper_phone" type="text"
-                                   class="form-control light ignore" placeholder="999-999-9999"
-                                   maxlength="15" value="{{ phone }}"/>
+                            >
                         </div>
                     </div>
                 </div>
 
-                               <div class="row panel-row flexHeight center-vertically">
+                <div class="row panel-row flexHeight center-vertically">
                     <div class="col-xs-10 col-xs-offset-1 col-sm-3 col-sm-offset-2">
                         <div class="form-label">Scheduling Type: *</div>
                     </div>
                     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
                         <div class="form-group">
                             <select name="schedule_dropdown" class="filter-selectbox">
+                                <option value="{{scheduling}}" selected>{{scheduling}} </option>
                                 {% for key, schedule in schedule_options %}
                                 <option value="{{ key }}">{{ schedule }}</option>
                                 {% endfor %} </select>
@@ -151,6 +195,7 @@
                     <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-0 col-md-4">
                         <div class="form-group">
                             <select name="load_dropdown" class="filter-selectbox">
+                                <option value="{{load_type}}" selected>{{load_type}} </option>
                                 {% for key, load in load_options %}
                                 <option value="{{ key }}">{{ load }}</option>
                                 {% endfor %} </select>

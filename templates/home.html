@@ -5,16 +5,17 @@
     <title>Romans Website</title>
 </head>
 <body>
-<h1>Hello World, Roman is going to bring you the data you needed!</h1>
+<h1 style="text-align: center;">Welcome to WaitTime</h1>
+<h2 style="text-align: center;">Get Info and Leave Info About Your Load and Wait Time!</h2>
 
 <button onclick="window.location.href = '/add_new_company';">Add New Company Info</button>
 
 
 <table style="width:100%">
-        <tr><td>company_name</td><td>address</td><td>state</td><td>city</td><td>average_wait</td><td>average_load</td></tr>
+        <tr><td>company_name</td><td>open_time</td><td>close_time</td><td>state</td><td>city</td><td>average_wait</td><td>average_load</td><td>edit button</td></tr>
 
 {% for company in company_infos %}
-        <tr><td>{{ company.company_name }}</td><td>{{ company.address }}</td><td>{{ company.state }}</td><td>{{ company.city }}</td><td>{{ company.average_wait }}</td><td>{{ company.average_load }}</td></tr>
+        <tr><td>{{ company.company_name }}</td><td>{{ company.open_time }}</td><td>{{ company.close_time }}</td><td>{{ company.state }}</td><td>{{ company.city }}</td><td>{{ company.average_wait }}</td><td>{{ company.average_load }}</td><td><button  onclick="window.location.href = '/edit_company/{{ company.pk }}/';">Edit</button></td></tr>
 {% endfor %}
 
 </table>
