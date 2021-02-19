@@ -95,8 +95,8 @@ def edit_company_form(request, **kwargs):
 
     data = dict(
         post_url=f'save_edit_company/{company_pk}/',
-        title='Edit Company Info',
-        header=f'Edit Company Info for {company.company_name}',
+        title='Add Times to Average or Edit',
+        header=f'Add Times to Average or Edit - {company.company_name}',
 
         states=STATES_TUPLE,
         schedule_options=SCHEDULING_OPTIONS,
