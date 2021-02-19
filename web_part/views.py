@@ -19,8 +19,8 @@ def home(request):
 def add_company_info(request):
     new_company = dict(
         company_name= request.POST['company_name'],
-        open_time= request.POST['company_opening_time'],
-        close_time= request.POST['company_closing_time'],
+        # open_time= request.POST['company_opening_time'],
+        # close_time= request.POST['company_closing_time'],
         address= request.POST['address'],
         phone= request.POST['company_phone'],
         website_link= request.POST['company_website_link'],
@@ -33,8 +33,8 @@ def add_company_info(request):
         scheduling= request.POST['schedule_dropdown'],
         load_type= request.POST['load_dropdown'],
     )
-    # import pdb
-    # pdb.set_trace()
+    import pdb
+    pdb.set_trace()
     if request.POST['company_zip_code'] == '':
         new_company['zip_code'] = None
     else:
@@ -49,7 +49,10 @@ def add_company_info(request):
         new_company['load_time'] = None
     else:
         new_company['load_time'] = int(float(request.POST['load_time']))
-
+    if request.POST['company_opening_time'] == '':
+        new_company['open_time'] = None
+    if request.POST['company_closing_time'] == '':
+        new_company['close_time'] = None
     company_entry = CompanyInfoEntry.objects.create(**new_company)
     add_to_web = new_company
     add_to_web['average_wait'] = add_to_web['wait_time']
@@ -81,6 +84,15 @@ def edit_company_form(request, **kwargs):
     company_pk =  kwargs['pk']
     company = CompanyInfo.objects.get(pk=company_pk)
 
+    if company.open_time:
+        open_time = company.open_time.strftime("%I:%M")
+    else:
+        open_time = ''
+    if company.close_time:
+        close_time = company.close_time.strftime("%I:%M")
+    else:
+        close_time = ''
+
     data = dict(
         post_url=f'save_edit_company/{company_pk}/',
         title='Edit Company Info',
@@ -91,8 +103,8 @@ def edit_company_form(request, **kwargs):
         load_options=LOAD_TYPE_OPTIONS,
 
         company_name= company.company_name,
-        open_time= company.open_time.strftime("%I:%M"),
-        close_time= company.close_time.strftime("%I:%M"),
+        open_time= open_time,
+        close_time= close_time,
 
         address= company.address,
         phone= company.phone,
@@ -117,8 +129,8 @@ def save_edit_company(request, **kwargs):
     new_company = dict(
         company_info=company_info,
         company_name=request.POST['company_name'],
-        open_time=request.POST['company_opening_time'],
-        close_time=request.POST['company_closing_time'],
+        # open_time=request.POST['company_opening_time'],
+        # close_time=request.POST['company_closing_time'],
         address=request.POST['address'],
         phone=request.POST['company_phone'],
         website_link=request.POST['company_website_link'],
@@ -146,6 +158,11 @@ def save_edit_company(request, **kwargs):
         new_company['load_time'] = None
     else:
         new_company['load_time'] = int(float(request.POST['load_time']))
+
+    if request.POST['company_opening_time'] == '':
+        new_company['open_time'] = None
+    if request.POST['company_closing_time'] == '':
+        new_company['close_time'] = None
 
     company_entry = CompanyInfoEntry.objects.create(**new_company)
     add_to_web = new_company
