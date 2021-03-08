@@ -33,8 +33,7 @@ def add_company_info(request):
         scheduling= request.POST['schedule_dropdown'],
         load_type= request.POST['load_dropdown'],
     )
-    import pdb
-    pdb.set_trace()
+
     if request.POST['company_zip_code'] == '':
         new_company['zip_code'] = None
     else:
